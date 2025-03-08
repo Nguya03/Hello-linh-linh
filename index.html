@@ -8,15 +8,19 @@
     <style>
         body {
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
             font-family: 'Pacifico', cursive;
             text-align: center;
             box-sizing: border-box;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
         }
         .hidden {
             display: none;
@@ -29,8 +33,8 @@
             100% { opacity: 1; transform: translateY(0); }
         }
         .btn {
-            padding: 10px 20px;
-            font-size: 1.2em;
+            padding: 10px 15px;
+            font-size: 1em;
             background: linear-gradient(45deg, #ff6b6b, #ffcccb);
             color: #fff;
             border: 2px dashed #ff47b3;
@@ -41,14 +45,19 @@
         }
         .btn:hover {
             background: linear-gradient(45deg, #ff4757, #ff9a9e);
-            transform: rotate(-5deg) scale(1.1);
+            transform: rotate(-5deg) scale(1.05);
         }
         .question-box {
             background: #fff0f6;
             border: 3px dashed #ff47b3;
             border-radius: 15px;
-            padding: 20px;
+            padding: 15px;
             box-shadow: 0 4px 15px rgba(255, 71, 179, 0.2);
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -63,7 +72,7 @@
             <h2>Trả lời đúng mới được quà nha! 😜</h2>
             <button class="btn" onclick="showQuestion1()">Tới luôn!</button>
         </div>
-        
+
         <div id="question1" class="hidden fade-in question-box">
             <h3>Câu 1: 2 + 2 = ?</h3>
             <button class="btn" onclick="answerQuestion(1, true)">4</button>
@@ -81,16 +90,16 @@
             <button class="btn" onclick="answerQuestion(3, true)">Có</button>
             <button class="btn" onclick="answerQuestion(3, false)">Không có đáp án không đâu :))</button>
         </div>
-        
+
         <div id="gift-screen" class="hidden fade-in">
             <h2>Linh có quà nè! 🎁 (Mở ra thử xem gì nha!)</h2>
             <button class="btn" onclick="showGift()">Mở đê</button>
             <div id="gift-image" class="hidden">
-                <img src="Meo-Tang-Hoa-Hong.jpg" alt="Hình ảnh quà 1" style="max-width: 70%; border-radius: 10px; margin-top: 20px;">
+                <img src="Meo-Tang-Hoa-Hong.jpg" alt="Hình ảnh quà 1">
             </div>
             <div id="gift-message" class="hidden">
                 <h2>😆 Trôn trôn VN! Đây là quà thiệt: 🌸 Mừng 8/3 lần nữa nhé!</h2>
-                <img src="fd79dc8b-88d7-49fe-837a-f176dc11e1c7.jpg" alt="Hình ảnh quà 2" style="max-width: 70%; border-radius: 10px; margin-top: 20px;">
+                <img src="fd79dc8b-88d7-49fe-837a-f176dc11e1c7.jpg" alt="Hình ảnh quà 2">
             </div>
         </div>
     </div>
