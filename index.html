@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vô coi nè Linh</title>
+    <title>Chơi lớn nè Linh!</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
     <style>
         body {
@@ -24,96 +24,114 @@
         .fade-in {
             animation: fadeIn 2s ease forwards;
         }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
         .btn {
             padding: 10px 20px;
             font-size: 1.2em;
-            background: linear-gradient(45deg, #ff61a6, #ffcccb);
+            background: linear-gradient(45deg, #ff6b6b, #ffcccb);
             color: #fff;
             border: 2px dashed #ff47b3;
             border-radius: 30px;
-            box-shadow: 0 4px 15px rgba(255, 71, 179, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             transition: 0.3s, transform 0.2s;
-            position: relative;
         }
         .btn:hover {
-            background: linear-gradient(45deg, #ff47b3, #ff85a2);
+            background: linear-gradient(45deg, #ff4757, #ff9a9e);
             transform: rotate(-5deg) scale(1.1);
         }
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .question-box {
             background: #fff0f6;
             border: 3px dashed #ff47b3;
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 4px 15px rgba(255, 71, 179, 0.2);
-            z-index: 10;
-            display: none;
-        }
-        .popup h2 {
-            color: #ff47b3;
-            font-size: 1.5em;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div id="start-screen" class="fade-in">
-            <button class="btn" onclick="startQuiz()">Nhấn vô đi Linh</button>
+            <h1>🌟 Linh ơi, dám chơi không? 🌟</h1>
+            <button class="btn" onclick="startQuiz()">Dám thì bấm đi!</button>
         </div>
         
-        <div id="popup" class="popup">
-            <h2>Đúng rùi đó ngừi đẹp! 💖</h2>
+        <div id="quiz-screen" class="hidden fade-in">
+            <h2>Trả lời đúng mới được quà nha! 😜</h2>
+            <button class="btn" onclick="showQuestion1()">Tới luôn!</button>
+        </div>
+        
+        <div id="question1" class="hidden fade-in question-box">
+            <h3>Câu 1: 2 + 2 = ?</h3>
+            <button class="btn" onclick="answerQuestion(1, true)">4</button>
+            <button class="btn" onclick="answerQuestion(1, false)">5</button>
+        </div>
+        
+        <div id="question2" class="hidden fade-in question-box">
+            <h3>Câu 2: Trái đất hình gì? 🌍</h3>
+            <button class="btn" onclick="answerQuestion(2, true)">Tròn</button>
+            <button class="btn" onclick="answerQuestion(2, false)">Vuông</button>
+        </div>
+        
+        <div id="question3" class="hidden fade-in question-box">
+            <h3>Câu 3: Ngày hôm nay vui không? 🎈</h3>
+            <button class="btn" onclick="answerQuestion(3, true)">Có</button>
+            <button class="btn" onclick="answerQuestion(3, false)">Không có đáp án không đâu :))</button>
+        </div>
+        
+        <div id="gift-screen" class="hidden fade-in">
+            <h2>Linh có quà nè! 🎁 (Mở ra thử xem gì nha!)</h2>
+            <button class="btn" onclick="showGift()">Mở đê</button>
+            <div id="gift-image" class="hidden">
+                <img src="Meo-Tang-Hoa-Hong.jpg" alt="Hình ảnh quà 1" style="max-width: 70%; border-radius: 10px; margin-top: 20px;">
+            </div>
+            <div id="gift-message" class="hidden">
+                <h2>😆 Trôn trôn VN! Đây là quà thiệt: 🌸 Mừng 8/3 lần nữa nhé!</h2>
+                <img src="fd79dc8b-88d7-49fe-837a-f176dc11e1c7.jpg" alt="Hình ảnh quà 2" style="max-width: 70%; border-radius: 10px; margin-top: 20px;">
+            </div>
         </div>
     </div>
 
     <script>
+        const compliments = ['🎉 Đúng rồi! Hay quá!', '🔥 Đỉnh quá chời!', '✨ Chứ còn gì nữa!'];
+        
         function startQuiz() {
-            alert('XIN HÃY TRẢ LỜI CÁC CÂU HỎI SAU');
-            setTimeout(askQuestion1, 500);
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
         }
 
-        function askQuestion1() {
-            const answer = prompt('Câu 1: 1 + 1 = ? (Chọn: "1" hoặc "hong biết")');
-            if (answer === '1' || answer === 'hong biết') {
-                showPopup();
-                setTimeout(askQuestion2, 2000);
-            } else {
-                alert('Sai rồi, thử lại nhé!');
-                askQuestion1();
-            }
+        function showQuestion1() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('question1').classList.remove('hidden');
         }
 
-        function askQuestion2() {
-            const answer = prompt('Câu 2: Ngày hôm nay có vui không á? (Chọn: "có" hoặc "không có đáp án không đâu :))")');
-            if (answer === 'có' || answer === 'không có đáp án không đâu :))') {
-                showPopup();
-                setTimeout(showGift, 2000);
-            } else {
-                alert('Hmmm, nghĩ lại thử nha!');
-                askQuestion2();
-            }
-        }
-
-        function showPopup() {
-            const popup = document.getElementById('popup');
-            popup.style.display = 'block';
+        function answerQuestion(question, isCorrect) {
+            const message = document.createElement('h3');
+            message.innerText = isCorrect ? compliments[question - 1] : '🙈 Sai rồi! Thử lại đi!';
+            document.querySelector('.container').appendChild(message);
+            
             setTimeout(() => {
-                popup.style.display = 'none';
-            }, 1500);
+                message.remove();
+                if (isCorrect) {
+                    document.getElementById(`question${question}`).classList.add('hidden');
+                    if (question < 3) {
+                        document.getElementById(`question${question + 1}`).classList.remove('hidden');
+                    } else {
+                        document.getElementById('gift-screen').classList.remove('hidden');
+                    }
+                }
+            }, 2000);
         }
 
         function showGift() {
-            alert('Chúc mừng! Linh nhận được phần quà 🎁');
-            const img = document.createElement('img');
-            img.src = 'z6382964290159_ab62dcb4b8dadd62d589ba51379e6f4c.jpg';
-            img.style.maxWidth = '50%';
-            img.style.borderRadius = '15px';
-            img.style.boxShadow = '0 4px 15px rgba(255, 71, 179, 0.3)';
-            document.body.appendChild(img);
+            document.getElementById('gift-image').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('gift-image').classList.add('hidden');
+                document.getElementById('gift-message').classList.remove('hidden');
+            }, 2000);
         }
     </script>
 </body>
