@@ -13,7 +13,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(135deg, #a8c0ff, #3f2b96);
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
             font-family: 'Pacifico', cursive;
             text-align: center;
             box-sizing: border-box;
@@ -24,50 +24,96 @@
         .fade-in {
             animation: fadeIn 2s ease forwards;
         }
-        .fade-out {
-            animation: fadeOut 1.5s ease forwards;
-        }
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(-20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeOut {
-            0% { opacity: 1; }
-            100% { opacity: 0; }
-        }
         .btn {
             padding: 10px 20px;
             font-size: 1.2em;
-            background: #ff6b6b;
+            background: linear-gradient(45deg, #ff61a6, #ffcccb);
             color: #fff;
-            border: none;
+            border: 2px dashed #ff47b3;
             border-radius: 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(255, 71, 179, 0.3);
             cursor: pointer;
-            transition: 0.3s, opacity 0.5s ease, transform 0.2s;
+            transition: 0.3s, transform 0.2s;
             position: relative;
         }
         .btn:hover {
-            background: #ff4757;
-            transform: scale(1.1);
+            background: linear-gradient(45deg, #ff47b3, #ff85a2);
+            transform: rotate(-5deg) scale(1.1);
+        }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff0f6;
+            border: 3px dashed #ff47b3;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(255, 71, 179, 0.2);
+            z-index: 10;
+            display: none;
+        }
+        .popup h2 {
+            color: #ff47b3;
+            font-size: 1.5em;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div id="start-screen" class="fade-in">
-            <button class="btn" onclick="showGift(this)">Nhấn vào đi Linh</button>
+            <button class="btn" onclick="startQuiz()">Nhấn vô đi Linh</button>
+        </div>
+        
+        <div id="popup" class="popup">
+            <h2>Đúng rùi đó ngừi đẹp! 💖</h2>
         </div>
     </div>
 
     <script>
-        function showGift(button) {
-            button.classList.add('fade-out');
+        function startQuiz() {
+            alert('XIN HÃY TRẢ LỜI CÁC CÂU HỎI SAU');
+            setTimeout(askQuestion1, 500);
+        }
+
+        function askQuestion1() {
+            const answer = prompt('Câu 1: 1 + 1 = ? (Chọn: "1" hoặc "hong biết")');
+            if (answer === '1' || answer === 'hong biết') {
+                showPopup();
+                setTimeout(askQuestion2, 2000);
+            } else {
+                alert('Sai rồi, thử lại nhé!');
+                askQuestion1();
+            }
+        }
+
+        function askQuestion2() {
+            const answer = prompt('Câu 2: Ngày hôm nay có vui không á? (Chọn: "có" hoặc "không có đáp án không đâu :))")');
+            if (answer === 'có' || answer === 'không có đáp án không đâu :))') {
+                showPopup();
+                setTimeout(showGift, 2000);
+            } else {
+                alert('Hmmm, nghĩ lại thử nha!');
+                askQuestion2();
+            }
+        }
+
+        function showPopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'block';
             setTimeout(() => {
-                button.innerText = 'Bất ngờ chưa? 🎉';
-                button.classList.remove('fade-out');
-                button.classList.add('fade-in');
+                popup.style.display = 'none';
             }, 1500);
+        }
+
+        function showGift() {
+            alert('Chúc mừng! Linh nhận được phần quà 🎁');
+            const img = document.createElement('img');
+            img.src = 'z6382964290159_ab62dcb4b8dadd62d589ba51379e6f4c.jpg';
+            img.style.maxWidth = '50%';
+            img.style.borderRadius = '15px';
+            img.style.boxShadow = '0 4px 15px rgba(255, 71, 179, 0.3)';
+            document.body.appendChild(img);
         }
     </script>
 </body>
